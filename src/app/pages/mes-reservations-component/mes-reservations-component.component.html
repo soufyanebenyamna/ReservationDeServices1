@@ -1,0 +1,32 @@
+<div class="reservations-container">
+
+  <h2>Mes Réservations</h2>
+
+  <div *ngIf="reservations.length === 0" class="empty">
+    Vous n'avez aucune réservation.
+  </div>
+
+  <div class="reservation-card" *ngFor="let r of reservations">
+    <div class="info">
+      <h3>{{ r.providerName }}</h3>
+
+      <p><strong>Date :</strong> {{ r.date }}</p>
+      <p><strong>Heure :</strong> {{ r.start }} - {{ r.end }}</p>
+
+      <p>
+        <strong>Statut :</strong>
+        <span class="status" [class.cancelled]="r.status === 'annulée'">
+          {{ r.status }}
+        </span>
+      </p>
+    </div>
+
+    <button 
+      class="cancel-btn"
+      *ngIf="r.status !== 'annulée'"
+      (click)="cancelReservation(r.id)">
+      Annuler
+    </button>
+  </div>
+
+</div>

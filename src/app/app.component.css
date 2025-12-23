@@ -1,0 +1,31 @@
+
+
+
+.nav {
+  position: fixed; /* La navbar reste toujours visible */
+  top: 0;          /* Positionné en haut de la page */
+  left: 0;
+  width: 100%;     /* Prend toute la largeur */
+  z-index: 1000;   /* Au-dessus des autres éléments */
+  background-color: var(--color-header-bg); /* Assurez-vous que la couleur est définie */
+
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  margin-bottom: 70px;
+}
+.app-nav-bar {
+  margin-bottom: 95px; /* Espace pour la navbar fixe */
+}
+
+.admin-toggle {
+  position: absolute;
+  right: 20px;
+  top: 12px;
+}
+
+.admin-toggle button {
+  border: none;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+

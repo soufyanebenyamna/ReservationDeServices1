@@ -1,0 +1,60 @@
+<div class="admin-page">
+  <h2>Admin - Gestion des Prestataires</h2>
+
+  <div class="controls">
+    <button (click)="startAdd()" class="add-btn">Ajouter un prestataire</button>
+    <div class="danger">
+      <button class="reset-btn" (click)="resetStorage()">Reset Storage</button>
+    </div>
+
+    <div class="search-controls">
+      <input [(ngModel)]="searchText" placeholder="Rechercher par nom..." />
+      <select [(ngModel)]="filterSpecialty">
+        <option value="">Tous</option>
+        <option *ngFor="let s of specialties">{{ s }}</option>
+      </select>
+      <button (click)="clearFilters()">Effacer</button>
+    </div>
+  </div>
+  <div *ngIf="editMode" class="editor">
+    <h3>{{ current.id ? 'Modifier' : 'Ajouter' }} Prestataire</h3>
+    <label>Nom: <input [(ngModel)]="current.name" /></label>
+    <label>Spécialité: <input [(ngModel)]="current.specialty" /></label>
+    <label>Prix: <input type="number" [(ngModel)]="current.price" /></label>
+    <label>Description: <textarea [(ngModel)]="current.description"></textarea></label>
+    <label>Horaires: <input [(ngModel)]="current.horaires" /></label>
+    <label>Expérience: <input [(ngModel)]="current.experience" /></label>
+
+    <div class="image-controls">
+      <label>Importer une image: <input type="file" (change)="onFileSelected($event)" /></label>
+      <div class="preview">Aperçu: <img *ngIf="current.img" [src]="current.img" alt="preview"/></div>
+    </div>
+
+    <div class="editor-actions">
+      <button (click)="save()" class="save-btn">Enregistrer</button>
+      <button (click)="cancelEdit()" class="cancel-btn">Annuler</button>
+    </div>
+  </div>
+
+  <div class="list">
+    <h3>Liste des prestataires</h3>
+    <table>
+      <thead>
+        <tr><th>ID</th><th>Image</th><th>Nom</th><th>Spécialité</th><th>Prix</th><th>Actions</th></tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of filteredProviders">
+          <td>{{p.id}}</td>
+          <td><img [src]="p.img" alt="img" class="thumb"/></td>
+          <td>{{p.name}}</td>
+          <td>{{p.specialty}}</td>
+          <td>{{p.price}} DH/h</td>
+          <td>
+            <button (click)="startEdit(p)" class="edit-btn">Modifier</button>
+            <button (click)="remove(p.id)" class="delete-btn">Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

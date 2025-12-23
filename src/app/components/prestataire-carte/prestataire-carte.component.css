@@ -1,0 +1,88 @@
+/* src/app/components/prestataire-carte/prestataire-carte.component.css */
+
+/* Réutilisation des variables de couleur (important pour la cohérence) */
+:root {
+  --color-primary: #1A73E8; 
+  --color-primary-hover: #155AB6; 
+  --color-cta: #F9A825; 
+  --color-button-text: #F5F7FA; 
+  --color-text: #222831; 
+}
+
+/* Carte individuelle du prestataire */
+.prestataire-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  padding: 20px;
+  /* S'assure que toutes les cartes sont bien alignées dans la grille */
+  height: 100%; 
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 1.5rem;
+}
+
+.prestataire-card:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  transform: scale(1.02);
+  cursor: pointer;
+}
+
+.card-title {
+  color: var(--color-primary-hover);
+  margin-top: 0;
+  font-size: 1.25em;
+}
+
+.card-specialty, .card-experience, .card-price {
+  color: var(--color-text);
+  margin: 5px 0;
+}
+
+.card-rating {
+  font-weight: bold;
+  color: var(--color-cta); /* Note en jaune-orange */
+  margin: 10px 0 20px 0;
+}
+
+/* Style du bouton de détails */
+.details-button {
+  background-color: #1A73E8; /* Utilisation de #1A73E8 (PRIMARY & BTN) */
+  color: #F5F7FA;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: auto; /* Pousse le bouton en bas de la carte */
+  width: 100%;
+}
+
+.details-button:hover {
+  background-color: #155AB6; /* Utilisation de #155AB6 (BTN HOVER) */
+}
+
+.card-image {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.card-price {
+  font-weight: 700;
+  color: #2d8659;
+  margin: 6px 0;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}

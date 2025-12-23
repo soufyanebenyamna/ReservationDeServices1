@@ -1,0 +1,148 @@
+/* Container */
+.container { width:92%; max-width:1100px; margin:0 auto; padding:1rem; }
+
+/* Header: two-column layout for image (left) and reservation (right) */
+.detail-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* left image, right reservation */
+  gap: 1rem;
+  align-items: start;
+  margin-bottom: 1rem;
+}
+
+/* Left column stacks image then meta */
+.left-col { display: flex; flex-direction: column; gap: 1rem; }
+
+/* Image: fills left column */
+.detail-avatar {
+  width: 100%;
+  height: 50vh;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 10px 32px rgba(0,0,0,0.10);
+  display: block;
+}
+
+/* Meta block under the image (left column) */
+.detail-meta {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  justify-content: flex-start;
+}
+
+.detail-name {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1.05;
+}
+.detail-specialty {
+  margin: 0;
+  color: #6b7280;
+  font-size: 1.05rem;
+}
+.detail-rating {
+  margin-top: 0.2rem;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #222831;
+}
+.detail-horaires {
+  margin-top: 0.2rem;
+  color: #4b5563;
+  font-size: 0.98rem;
+}
+
+/* Right column: reservation panel occupies the full right column */
+.right-col { display: flex; flex-direction: column; gap: 1rem; }
+.reservation-panel {
+  background:#fff;
+  padding:1rem;
+  border-radius:10px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.04);
+}
+
+/* Controls inside reservation panel */
+.date-choices .dates,
+.time-choices .times {
+  display:flex;
+  gap:0.5rem;
+  flex-wrap:wrap;
+  margin-top:0.5rem;
+}
+.date-btn,
+.time-btn {
+  padding:0.45rem 0.7rem;
+  border-radius:8px;
+  border:1px solid rgba(15,20,25,0.06);
+  background:transparent;
+  cursor:pointer;
+}
+.date-btn.active { background: var(--primary, #1A73E8); color: #fff; border-color: transparent; }
+.time-btn.selected { background: var(--primary, #1A73E8); color:#fff; border-color: transparent; }
+.time-btn.reserved { opacity:0.6; cursor:not-allowed; }
+
+/* Detail body: full-width description and rating */
+.detail-body { display:block; gap:1.25rem; align-items:start; }
+.description {
+  background: #fff;
+  padding:1rem;
+  border-radius:10px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.04);
+  margin-bottom: 1rem;
+}
+.rating-box { margin-top: 1rem; padding-top: 0.6rem; }
+.avg-rating { margin: 0.35rem 0; font-weight:600; color: var(--text, #222831); }
+.rating-form { display:flex; gap:0.6rem; align-items:center; flex-wrap:wrap; }
+.rating-form select { padding:0.45rem; border-radius:6px; border:1px solid rgba(15,20,25,0.06); }
+.rating-success { color: #059669; margin-left:0.6rem; }
+
+/* Booking form style */
+.booking-form { margin-top:1rem; }
+.booking-form label { display:block; margin-bottom:0.6rem; }
+.booking-form input { width:100%; padding:0.5rem; border-radius:6px; border:1px solid rgba(15,20,25,0.06); }
+
+.form-actions { display:flex; gap:0.6rem; margin-top:0.6rem; }
+.btn-primary { background:#1A73E8; color:#fff; padding:0.5rem 0.9rem; border-radius:8px; border:none; cursor:pointer; }
+.btn-outline { background:transparent; border:1px solid rgba(15,20,25,0.06); padding:0.45rem 0.8rem; border-radius:8px; cursor:pointer; }
+
+.error { color: #b91c1c; margin-top:0.5rem; }
+.success { color: #059669; margin-top:0.5rem; }
+
+/* Price summary display */
+.price-summary {
+  background: #f0f9ff;
+  padding: 0.7rem;
+  border-radius: 8px;
+  margin-top: 0.6rem;
+  border-left: 3px solid var(--primary, #1A73E8);
+}
+
+.price-summary p {
+  margin: 0;
+  font-size: 1rem;
+  color: #222831;
+}
+
+.total-price {
+  color: #059669;
+  font-size: 1.1rem;
+}
+
+/* Responsive: stack columns on small screens */
+@media (max-width: 980px) {
+  .detail-header { grid-template-columns: 1fr; }
+  .detail-avatar { height: 40vh; }
+  .reservation-panel { width: 100%; }
+}
+@media (max-width: 640px) {
+  .detail-avatar { height: 32vh; }
+}
+.detail-price {
+  margin-top: 0.4rem;
+  color: #059669;
+  font-size: 1.1rem;
+  font-weight: 700;
+}

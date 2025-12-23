@@ -1,0 +1,53 @@
+<section id="prestataires" class="prestataires-list-section">
+  <div class="container">
+    <h2 class="text-center">Nos Services Disponibles</h2>
+
+    <div class="controls" role="search" aria-label="Recherche et filtres">
+      <input
+        class="search-input"
+        type="search"
+        [(ngModel)]="searchText"
+        placeholder="Rechercher un prestataire ou une spécialité..."
+        aria-label="Recherche"
+      />
+
+      <select
+        class="filter-select"
+        [(ngModel)]="selectedSpecialty"
+        aria-label="Filtrer par spécialité"
+      >
+        <option value="all">Toutes les spécialités</option>
+        <option *ngFor="let s of specialties" [value]="s">{{ s }}</option>
+      </select>
+
+      <label class="small">Min. note</label>
+      <select class="filter-select" [(ngModel)]="minRating" aria-label="Filtrer par note minimale">
+        <option [ngValue]="0">Toutes</option>
+        <option [ngValue]="1">1+</option>
+        <option [ngValue]="2">2+</option>
+        <option [ngValue]="3">3+</option>
+        <option [ngValue]="4">4+</option>
+        <option [ngValue]="5">5</option>
+      </select>
+
+      <label class="small">Prix (DH)</label>
+      <input class="filter-select" type="number" [(ngModel)]="priceMin" placeholder="min" aria-label="Prix min" />
+      <input class="filter-select" type="number" [(ngModel)]="priceMax" placeholder="max" aria-label="Prix max" />
+
+      <label class="small">Expérience (ans)</label>
+      <input class="filter-select" type="number" [(ngModel)]="minExperienceYears" placeholder="min années" aria-label="Expérience minimale" />
+
+      <button type="button" class="clear-btn" (click)="clearFilters()">
+        Effacer
+      </button>
+    </div>
+        <div class="prestataires-grid" role="list">
+          <app-prestataire-carte
+            role="listitem" class="carte"
+            *ngFor="let p of filteredPrestataires"
+            [prestataire]="p"
+            (voirDetails)="voirDetails($event)">
+          </app-prestataire-carte>
+        </div>
+  </div>
+</section>

@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+}
+
+/* Buttons: no borders */
+button, .btn-primary, .btn-outline, .add-btn, .edit-btn, .delete-btn, .save-btn, .cancel-btn {
+  border: none;
+  outline: none;
+}
+
+button:focus {
+  outline: 2px solid rgba(26,115,233,0.2);
+}

@@ -1,0 +1,30 @@
+<!-- src/app/pages/accueil/accueil.component.html -->
+
+<div class="wrapper">
+  <section class="hero-section" aria-labelledby="hero-title">
+    <div class="hero-inner">
+      <h1 id="hero-title" class="hero-title">Réservez vos services en quelques clics</h1>
+      <p class="hero-subtitle">
+        Trouvez et réservez facilement vos créneaux avec les meilleurs prestataires
+      </p>
+      <a class="cta-button" href="#prestataires">Voir les services</a>
+    </div>
+  </section>
+
+  <main>
+    <section id="prestataires" class="prestataires-list-section">
+      <div class="container">
+        <h2 class="text-center">Nos Meilleure Services</h2>
+
+        <div class="prestataires-grid" role="list">
+          <app-prestataire-carte class="carte"
+            role="listitem"
+            *ngFor="let p of prestataires"
+            [prestataire]="p"
+            (voirDetails)="voirDetails($event)">
+          </app-prestataire-carte>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>

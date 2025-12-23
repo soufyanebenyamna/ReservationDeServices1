@@ -1,0 +1,52 @@
+.admin-page {
+  padding: 20px;
+}
+
+.controls {
+  margin-bottom: 12px;
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+.add-btn {
+  background-color: #1a73e9;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.danger { margin-left: 8px; display:flex; gap:8px; }
+.reset-btn { background:#d84315; color:#fff; padding:8px 10px; border-radius:6px }
+
+.search-controls { margin-left: 8px; display:flex; gap:8px; align-items:center; }
+.search-controls input { padding:6px 8px; border-radius:6px; border:1px solid #ccc }
+.search-controls select { padding:6px 8px; border-radius:6px; }
+.search-controls button { padding:6px 8px; border-radius:6px; }
+
+
+
+.editor {
+  background: transparent;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 18px;
+}
+
+.editor label {
+  display: block;
+  margin: 6px 0;
+}
+
+.preview img { max-width: 120px; max-height: 80px; border-radius: 6px; }
+.thumb { width: 70px; height: 50px; object-fit: cover; border-radius: 4px; }
+
+.save-btn { background: #2e7d32; color: #fff; padding: 6px 10px; border-radius: 6px; }
+.cancel-btn { margin-left: 8px; }
+.edit-btn { background: #1976d2; color: #fff; padding: 6px 8px; border-radius: 6px; }
+.delete-btn { background: #d32f2f; color: #fff; padding: 6px 8px; border-radius: 6px; margin-left: 6px; }
+
+table { width: 100%; border-collapse: collapse; border: none; box-shadow: none; }
+thead, tbody, tr, th, td { border: none !important; }
+th, td { padding: 8px; text-align: left; }
+

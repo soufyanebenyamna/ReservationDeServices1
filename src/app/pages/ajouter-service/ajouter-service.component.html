@@ -1,0 +1,104 @@
+<div class="container ajouter-prestataire-page">
+  <h1 class="service-title">Ajouter un nouveau prestataire</h1>
+
+  <form (ngSubmit)="submitForm()" #serviceForm="ngForm" class="service-form">
+    
+    <div class="form-group">
+      <label for="name">Nom du prestataire <span class="required">*</span></label>
+      <input
+        id="name"
+        type="text"
+        name="name"
+        [(ngModel)]="form.name"
+        placeholder="Ex: Coiffure Élégance"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="specialty">Spécialité <span class="required">*</span></label>
+      <select id="specialty" name="specialty" [(ngModel)]="form.specialty" required>
+        <option value="" disabled selected>Choisir une spécialité</option>
+        <option *ngFor="let s of specialties" [value]="s">{{ s }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        name="description"
+        [(ngModel)]="form.description"
+        placeholder="Décrivez votre service..."
+        rows="4"
+      ></textarea>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="price">Prix (DH/heure) <span class="required">*</span></label>
+        <input
+          id="price"
+          type="number"
+          name="price"
+          [(ngModel)]="form.price"
+          min="1"
+          placeholder="250"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="experience">Expérience</label>
+        <input
+          id="experience"
+          type="text"
+          name="experience"
+          [(ngModel)]="form.experience"
+          placeholder="Ex: 10 ans d'expérience"
+        />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="horaires">Horaires</label>
+      <input
+        id="horaires"
+        type="text"
+        name="horaires"
+        [(ngModel)]="form.horaires"
+        placeholder="Ex: Lun-Ven 09:00 - 18:00"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="imgFile">Image (télécharger)</label>
+      <input id="imgFile" type="file" (change)="onFileSelected($event)" accept="image/*" />
+      <small class="muted">Ou fournir une URL dans le champ ci-dessous</small>
+    </div>
+
+
+    <div class="form-group">
+      <label for="img">Image URL (optionnel)</label>
+      <input
+        id="img"
+        type="text"
+        name="img"
+        [(ngModel)]="form.img"
+        placeholder="assets/images/img1.jpg"
+      />
+    </div>
+
+    <!-- Messages -->
+    <div class="messages">
+      <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+      <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+    </div>
+
+    <!-- Form Actions -->
+    <div class="form-actions">
+      <button type="submit" class="btn-primary">Ajouter le prestataire</button>
+      <button type="button" class="btn-outline" (click)="cancel()">Annuler</button>
+    </div>
+  </form>
+</div>

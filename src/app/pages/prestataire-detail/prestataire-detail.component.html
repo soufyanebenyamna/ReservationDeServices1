@@ -1,0 +1,149 @@
+<!-- src/app/pages/prestataire-detail/prestataire-detail.component.html -->
+
+<section class="detail-section" *ngIf="provider; else notFound">
+  <div class="container">
+
+    <!-- Header: image (left) + reservation (right) -->
+    <div class="detail-header">
+      <div class="left-col">
+        <img [src]="provider.img || defaultImg" (error)="onImgError($event)" alt="Photo de {{ provider.name }}" class="detail-avatar" />
+
+        <div class="detail-meta">
+          <h1 class="detail-name">{{ provider.name }}</h1>
+          <p class="detail-specialty">{{ provider.specialty }}</p>
+          <p class="detail-rating">{{ getStarDisplay(averageRating) }} {{ averageRating }} <small>({{ ratingCount }} avis)</small></p>
+          <p class="detail-horaires" *ngIf="provider.horaires">Horaires: {{ provider.horaires }}</p>
+          <p class="detail-price" *ngIf="provider.price">{{ provider.price }} DH / heure</p>
+        </div>
+      </div>
+
+      <div class="right-col">
+        <div class="reservation-panel">
+          <h2>Réserver</h2>
+
+          <!-- 1) Choose a Day -->
+          <div class="date-choices">
+            <p class="small">1. Choisissez le jour</p>
+            <div class="dates">
+              <button
+                *ngFor="let d of availableDates"
+                type="button"
+                class="date-btn"
+                [class.active]="d === selectedDate"
+                (click)="chooseDate(d)"
+              >
+                {{ d }}
+              </button>
+            </div>
+          </div>
+
+          <!-- 2) Choose Start Time -->
+          <div class="time-choices" *ngIf="selectedDate">
+            <p class="small">2. Sélectionnez l'heure de début</p>
+            <div class="times">
+              <button
+                *ngFor="let s of slotsForDate(selectedDate || '')"
+                type="button"
+                class="time-btn"
+                [class.reserved]="s.reserved"
+                [class.selected]="selectedStartSlot?.id === s.id"
+                [disabled]="s.reserved"
+                (click)="chooseStartTime(s)"
+              >
+                {{ s.time }}
+              </button>
+            </div>
+          </div>
+
+          <!-- 3) Choose End Time (only after start is selected) -->
+          <div class="time-choices" *ngIf="selectedStartSlot">
+            <p class="small">3. Sélectionnez l'heure de fin</p>
+            <div class="times">
+              <button
+                *ngFor="let s of slotsForDate(selectedDate ||'')"
+                type="button"
+                class="time-btn"
+                [class.reserved]="s.reserved"
+                [class.selected]="selectedEndSlot?.id === s.id"
+                [disabled]="s.reserved"
+                (click)="chooseEndTime(s)"
+              >
+                {{ s.time }}
+              </button>
+            </div>
+          </div>
+
+          <!-- Price display when both start and end are selected -->
+          <div class="price-summary" *ngIf="selectedStartSlot && selectedEndSlot">
+            <p><strong>{{ selectedHours }} h(s)</strong> × {{ provider.price }} DH = <strong class="total-price">{{ totalPrice }} DH</strong></p>
+          </div>
+
+          <!-- 4) Booking form appears when time range is chosen -->
+          <div class="booking-form" *ngIf="selectedStartSlot && selectedEndSlot">
+            <h3>Réserver — {{ selectedStartSlot.date }} de {{ selectedStartSlot.time }} à {{ selectedEndSlot.time }}</h3>
+
+            <form (ngSubmit)="submitReservation()" #resForm="ngForm" novalidate>
+              <label>
+                Nom
+                <input type="text" name="name" [(ngModel)]="reserverName" required />
+              </label>
+
+              <label>
+                Téléphone
+                <input type="text" name="phone" [(ngModel)]="reserverPhone" required />
+              </label>
+
+              <label>
+                Email
+                <input type="email" name="email" [(ngModel)]="reserverEmail" required />
+              </label>
+
+              <div class="form-actions">
+                <button type="submit" class="btn-primary">Confirmer ({{ totalPrice }} DH)</button>
+                <button type="button" class="btn-outline" (click)="clearSelection()">Annuler</button>
+              </div>
+
+              <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+              <p class="success" *ngIf="reservationSuccess">Réservation confirmée — merci !</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Body: full-width "À propos" + rating below header -->
+    <div class="detail-body">
+      <div class="description">
+        <h3>À propos</h3>
+        <p>{{ provider.description || 'Pas de description disponible.' }}</p>
+
+        <!-- Rating box below "À propos" -->
+        <div class="rating-box">
+          <h4>Noter ce prestataire</h4>
+          <p class="avg-rating">Moyenne: <strong>{{ getStarDisplay(averageRating) }} {{ averageRating }}</strong> / 5 ({{ ratingCount }} avis)</p>
+
+          <div class="rating-form">
+            <label>
+              Votre note
+              <select [(ngModel)]="ratingValue" name="ratingValue">
+                <option [ngValue]="5">5 — Excellent</option>
+                <option [ngValue]="4">4 — Très bien</option>
+                <option [ngValue]="3">3 — Correct</option>
+                <option [ngValue]="2">2 — Insuffisant</option>
+                <option [ngValue]="1">1 — Mauvais</option>
+              </select>
+            </label>
+            <button type="button" class="btn-primary" (click)="submitRating()">Envoyer</button>
+            <span class="rating-success" *ngIf="ratingSuccess">Merci pour votre avis !</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #notFound>
+  <div class="container">
+    <p>Prestataire non trouvé.</p>
+  </div>
+</ng-template>

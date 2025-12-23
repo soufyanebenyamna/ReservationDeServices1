@@ -1,0 +1,17 @@
+<!-- src/app/components/prestataire-carte/prestataire-carte.component.html -->
+
+<div class="prestataire-card" aria-label="Carte prestataire">
+  <div class="card-content">
+    <img [src]="prestataire.img || defaultImg" (error)="onImgError($event)" alt="Photo de {{ prestataire.name }}" class="card-image" />
+
+    <h4 class="card-title">{{ prestataire.name }}</h4>
+    <p class="card-specialty">{{ prestataire.specialty }}</p>
+    <p class="card-experience">{{ prestataire.experience }}</p>
+    <p class="card-price">{{ prestataire.price }} DH/h</p>
+    <p class="card-rating" aria-label="note">★ {{ prestataire.rating }}</p>
+  </div>
+
+  <div class="card-actions">
+    <button (click)="onVoirDetails()" class="details-button">Détails</button>
+  </div>
+</div>
